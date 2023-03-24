@@ -97,6 +97,55 @@
 
             <!--Check here to see more details Bootstrap checkbox
              https://www.w3schools.com/bootstrap4/bootstrap_forms_inputs.asp-->
+
+             <!-- Start Assignment -->
+
+<!-- Use Bootstrap Collapse to hide/show exam -->
+<div class="accordion" id="examAccordion">
+    <div class="card">
+      <div class="card-header" id="examHeader">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#examCollapse" aria-expanded="true" aria-controls="examCollapse">
+            Exam
+          </button>
+        </h2>
+      </div>
+  
+      <div id="examCollapse" class="collapse show" aria-labelledby="examHeader" data-parent="#examAccordion">
+        <!-- List of questions -->
+        <ul class="list-group list-group-flush">
+          {% for question in course.questions.all %}
+            <li class="list-group-item">
+              <!-- Question text -->
+              <h4>{{ question.question_text }}</h4>
+  
+              <!-- List of choices -->
+              <ul class="list-group list-group-flush">
+                {% for choice in question.choices.all %}
+                  <li class="list-group-item">
+                    <!-- Choice checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="choice_{{ choice.id }}" id="choice_{{ choice.id }}" value="{{ choice.id }}">
+                      <label class="form-check-label" for="choice_{{ choice.id }}">
+                        {{ choice.choice_text }}
+                      </label>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+  
+        <!-- Submit button -->
+        <div class="card-footer">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+             <!-- End Assignment -->
     </div>
 </body>
 </html>
